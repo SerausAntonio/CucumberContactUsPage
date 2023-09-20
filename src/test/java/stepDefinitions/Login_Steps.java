@@ -12,31 +12,20 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import stepDefinitions.base.Hooks;
 
 import java.io.File;
 import java.io.IOException;
 import java.time.Duration;
 
-public class Login_Steps {
-    private  static WebDriver driver;
-    private WebDriverWait wait;
-    @Before
-    public void setUp(){
-        ChromeOptions options = new ChromeOptions();
-        options.setPageLoadStrategy(PageLoadStrategy.NORMAL);
-        driver = new ChromeDriver(options);
-        driver.manage().window().maximize();
-        wait = new WebDriverWait(driver,Duration.ofSeconds(10));
-    }
-    @After
-    public void tearDown(){
-        driver.quit();
-    }
+import static stepDefinitions.base.DriverFactory.getDriver;
+
+public class Login_Steps  {
+    private WebDriver driver = getDriver();
 
     @Given("I access the webdriver university login page")
     public void i_access_the_webdriver_university_login_page() {
         driver.get("https://webdriveruniversity.com/Login-Portal/index.html");
-        driver.manage().window().maximize();
     }
 
     @When("I enter username {string}")
@@ -55,7 +44,12 @@ public class Login_Steps {
 
     @Then("I should get an Alert with {string}")
     public void i_should_get_an_alert_with(String message) {
+        System.out.println("Ben hier bezig!!!!!");
+        System.out.println(message);
+        WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(10));
         Alert alert = wait.until(ExpectedConditions.alertIsPresent());
+
+        System.out.println(alert.getText());
 
         Assert.assertTrue(alert.getText().equals(message));
         alert.accept();
@@ -76,6 +70,7 @@ public class Login_Steps {
 
     @Then("I should be presented with the following login validation message {string}")
     public void i_should_be_presented_with_the_following_login_validation_message(String message) {
+        WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(10));
         Alert alert = wait.until(ExpectedConditions.alertIsPresent());
         Assert.assertTrue(alert.getText().equals(message));
         alert.accept();

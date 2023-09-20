@@ -11,23 +11,15 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
+import stepDefinitions.base.Hooks;
 
 import java.time.Duration;
 
-public class Contact_Us_Steps {
+import static stepDefinitions.base.DriverFactory.getDriver;
 
-    private WebDriver driver;
-    @Before
-    public void setUp(){
-        ChromeOptions options = new ChromeOptions();
-        options.setPageLoadStrategy(PageLoadStrategy.NORMAL);
-        driver = new ChromeDriver(options);
-        driver.manage().window().maximize();
-    }
-    @After
-    public void tearDown(){
-        driver.quit();
-    }
+public class Contact_Us_Steps  {
+    private WebDriver driver = getDriver();
+
     @Given("I access the webdriver university contact us page")
     public void i_access_the_webdriver_university_contact_us_page() {
 
