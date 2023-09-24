@@ -1,18 +1,12 @@
 package stepDefinitions;
-
-import io.cucumber.java.After;
-import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import stepDefinitions.base.Hooks;
 
 import java.io.File;
 import java.io.IOException;
@@ -22,6 +16,9 @@ import static stepDefinitions.base.DriverFactory.getDriver;
 
 public class Login_Steps  {
     private WebDriver driver = getDriver();
+
+    public Login_Steps() throws IOException {
+    }
 
     @Given("I access the webdriver university login page")
     public void i_access_the_webdriver_university_login_page() {
@@ -44,13 +41,9 @@ public class Login_Steps  {
 
     @Then("I should get an Alert with {string}")
     public void i_should_get_an_alert_with(String message) {
-        System.out.println("Ben hier bezig!!!!!");
-        System.out.println(message);
+
         WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(10));
         Alert alert = wait.until(ExpectedConditions.alertIsPresent());
-
-        System.out.println(alert.getText());
-
         Assert.assertTrue(alert.getText().equals(message));
         alert.accept();
     }

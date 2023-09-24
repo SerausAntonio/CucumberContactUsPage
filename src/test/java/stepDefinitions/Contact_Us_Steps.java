@@ -13,12 +13,16 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
 import stepDefinitions.base.Hooks;
 
+import java.io.IOException;
 import java.time.Duration;
 
 import static stepDefinitions.base.DriverFactory.getDriver;
 
 public class Contact_Us_Steps  {
     private WebDriver driver = getDriver();
+
+    public Contact_Us_Steps() throws IOException {
+    }
 
     @Given("I access the webdriver university contact us page")
     public void i_access_the_webdriver_university_contact_us_page() {
@@ -29,7 +33,7 @@ public class Contact_Us_Steps  {
     }
     @When("I enter a unique first name")
     public void i_enter_a_unique_first_name() {
-        driver.findElement(By.xpath("//*[@name='first_name']")).sendKeys("Alan");
+        driver.findElement(By.xpath("//*[@name='first_name11111']")).sendKeys("Alan");
     }
     @When("I enter a unique last name")
     public void i_enter_a_unique_last_name() {
